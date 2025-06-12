@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SharedCardComponent } from '../../shared/shared-card/shared-card.component';
-import { ExamHeaderComponent } from '../../components/exam-header/exam-header.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-exam',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, SharedCardComponent, ExamHeaderComponent,],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SharedCardComponent,],
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.css'
 })

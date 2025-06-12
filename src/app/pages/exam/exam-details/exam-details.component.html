@@ -1,27 +1,91 @@
-<app-shared-card>
-    <h2 class="text-muted text-center">Exam Details</h2>
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white text-center">
+        <h2 class="card-title mb-0">
+            <i class="fas fa-clipboard-list me-2"></i>
+            Exam Details
+        </h2>
+    </div>
 
-    <div *ngIf="exam">
-        <div class="mb-3">
-            <h3>{{ exam.title }}</h3>
-            <p>Created by Teacher ID: {{ exam.teacherId }}</p>
+    <div class="card-body" *ngIf="exam">
+        <!-- Exam Header Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="bg-light p-3 rounded">
+                    <h3 class="text-primary mb-2">{{ exam.title }}</h3>
+                    <p class="text-muted mb-0">
+                        <i class="fas fa-user-tie me-2"></i>
+                        Created by Teacher ID:
+                        <span class="badge bg-secondary">{{ exam.teacherId }}</span>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div *ngFor="let question of exam.questions; let i = index" class="mb-4">
-            <h4>Question {{ i + 1 }}: {{ question.question }}</h4>
-            <ul>
-                <li *ngFor="let option of question.options; let j = index">
-                    {{ option }}
-                    <span *ngIf="j === +question.correctAnswer" class="text-success">(Correct Answer)</span>
-                </li>
-            </ul>
+        <!-- Questions Section -->
+        <div class="mb-4">
+            <h4 class="border-bottom border-primary pb-2 mb-3">
+                <i class="fas fa-question-circle me-2 text-primary"></i>
+                Questions
+            </h4>
+
+            <div *ngFor="let question of exam.questions; let i = index" class="card mb-3">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <span class="badge bg-primary me-2">{{ i + 1 }}</span>
+                        {{ question.question }}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <div *ngFor="let option of question.options; let j = index"
+                            class="list-group-item d-flex justify-content-between align-items-center"
+                            [class.list-group-item-success]="j === +question.correctAnswer">
+                            <span>
+                                <strong>{{ toChar(65 + j) }}</strong> {{ option }}
+                            </span>
+                            <span *ngIf="j === +question.correctAnswer" class="badge bg-success">
+                                <i class="fas fa-check me-1"></i>
+                                Correct Answer
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- Students Section -->
         <div class="mb-3">
-            <h4>Students:</h4>
-            <ul>
-                <li *ngFor="let student of exam.students">{{ student }}</li>
-            </ul>
+            <h4 class="border-bottom border-primary pb-2 mb-3">
+                <i class="fas fa-users me-2 text-primary"></i>
+                Enrolled Students
+                <span class="badge bg-info ms-2">{{ exam.students.length || 0 }}</span>
+            </h4>
+
+            <div class="row" *ngIf="exam.students && exam.students.length > 0; else noStudents">
+                <div class="col-md-6 col-lg-4 mb-2" *ngFor="let student of exam.students; let i = index">
+                    <div class="card bg-light">
+                        <div class="card-body py-2">
+                            <i class="fas fa-user-graduate me-2 text-secondary"></i>
+                            {{ student }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #noStudents>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No students enrolled in this exam yet.
+                </div>
+            </ng-template>
         </div>
     </div>
-</app-shared-card>
+
+    <!-- Loading State -->
+    <div class="card-body text-center" *ngIf="!exam">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3 text-muted">Loading exam details...</p>
+    </div>
+</div>

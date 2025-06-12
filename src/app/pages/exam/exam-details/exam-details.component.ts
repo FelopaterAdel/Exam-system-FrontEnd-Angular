@@ -8,7 +8,7 @@ import { SharedCardComponent } from '../../../shared/shared-card/shared-card.com
 
 @Component({
   selector: 'app-exam-details',
-  imports:[CommonModule,SharedCardComponent],
+  imports:[CommonModule],
   templateUrl: './exam-details.component.html',
   styleUrls: ['./exam-details.component.css']
 })
@@ -31,4 +31,8 @@ export class ExamDetailsComponent implements OnInit {
       this.exam = exam;
     });
   }
+  toChar(code: number): string {
+    return String.fromCharCode(code);
+  }
+
 }
