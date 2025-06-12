@@ -8,6 +8,7 @@ import { ExamComponent } from './pages/exam/exam.component';
 import { ExamFormComponent } from './pages/exam/exam-form/exam-form.component';
 import { TakeExamComponent } from './pages/exam/take-exam/take-exam.component';
 import { ExamResultComponent } from './pages/exam/exam-result/exam-result.component';
+import { ProfileComponent } from './pages/account/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,9 @@ export const routes: Routes = [
       },
       { path: 'register', component: RegisterComponent, 
         data: { hideHeader: true }
+      },
+      { path: 'profile', component: ProfileComponent, 
+       
       },
     ],
   },
