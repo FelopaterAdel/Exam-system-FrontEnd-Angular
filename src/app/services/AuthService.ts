@@ -75,4 +75,5 @@ export class AuthService {
   isAuthenticated() {
     return !!this.currentToken;
   }
+  
 }
