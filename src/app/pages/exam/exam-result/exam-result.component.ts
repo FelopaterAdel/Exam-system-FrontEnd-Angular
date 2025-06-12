@@ -34,10 +34,8 @@ export class ExamResultComponent implements OnInit {
     this.error = '';
 
     this.resultService.getResult(this.examId).subscribe({
-  next: (response: any) => {
-    console.log('Full response:', response);
-    this.examResult = response.result; // Extract just the result part
-    console.log('Extracted result:', this.examResult);
+      next: (response: any) => {
+        this.examResult = response.result;
         this.loading = false;
       },
       error: (err: any) => {
@@ -51,7 +49,6 @@ export class ExamResultComponent implements OnInit {
   getScoreClass(): string {
     if (!this.examResult) return '';
     if (this.examResult.passed) return 'passed';
-
     return 'failed';
   }
 
@@ -75,7 +72,7 @@ export class ExamResultComponent implements OnInit {
     }
   }
 
-  
+
   goBack(): void {
     this.router.navigate(['/exams']);
   }

@@ -50,9 +50,6 @@ export class ExamComponent {
       this.examService.deleteExam(examId).subscribe({
         next: () => {
           this.refreshExamList();
-
-          this.exams = this.exams.filter(exam => exam._id !== examId);
-
           this.snackBar.open('Exam deleted successfully', 'Close', { duration: 3000 });
         },
         error: (err) => {

@@ -61,13 +61,10 @@ export class TakeExamComponent implements OnInit {
     return this.resultService.getResult;
   }
   showErrorMessage(message: string): void {
-    // You can use a snackbar, alert, or set a property to display the error
-    alert(message); // Or use Angular Material Snackbar if available
+    alert(message); 
   }
   submitExam(): void {
     const answers = this.examForm.value.answers;
-
-    // Validate form before submission
     if (!this.examForm.valid) {
       console.error('Form is not valid');
       return;
@@ -78,19 +75,17 @@ export class TakeExamComponent implements OnInit {
       return;
     }
 
-    this.isSubmitting = true; // Add loading state
+    this.isSubmitting = true; 
 
     this.resultService.submitExam(this.examId, answers).subscribe({
       next: (result) => {
         console.log('Exam submitted successfully:', result);
         this.isSubmitting = false;
-        // Navigate to results page or show success message
         this.router.navigate(['/exams', this.examId, 'result']);
       },
       error: (err) => {
         console.error('Exam submission failed:', err);
         this.isSubmitting = false;
-        // Show error message to user
         this.showErrorMessage('Failed to submit exam. Please try again.');
       }
     });
