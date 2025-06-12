@@ -1,23 +1,59 @@
-<!-- take-exam.component.html -->
 <app-shared-card>
-    <h2 class="text-muted text-center">Take Exam: {{ exam.title }}</h2>
+    <div class="exam-header mb-4">
+        <h2 class="text-center text-primary fw-bold mb-3">{{ exam.title }}</h2>
+        <div class="exam-info d-flex justify-content-between align-items-center">
+            <span class="badge bg-secondary">{{ exam.questions.length }} Questions</span>
+            <small class="text-muted">Read each question carefully</small>
+        </div>
+        <hr class="mt-3">
+    </div>
 
-    <form [formGroup]="examForm" (ngSubmit)="submitExam()" *ngIf="exam">
+    <form [formGroup]="examForm" (ngSubmit)="submitExam()" *ngIf="exam" class="exam-form">
         <div formArrayName="answers">
-            <div *ngFor="let question of exam.questions; let i = index" class="mb-4">
-                <h4>Question {{ i + 1 }}: {{ question.question }}</h4>
+            <div *ngFor="let question of exam.questions; let i = index" class="question-card mb-4">
+                <div class="question-header d-flex align-items-start mb-3">
+                    <span class="question-number badge bg-primary me-3">{{ i + 1 }}</span>
+                    <h5 class="question-text mb-0 flex-grow-1">{{ question.question }}</h5>
+                </div>
 
-                <div *ngFor="let option of question.options; let j = index" class="form-check">
-                    <input class="form-check-input" type="radio" [formControlName]="i.toString()" [value]="j"
-                        [id]="'q' + i + 'o' + j">
-                    <label class="form-check-label" [for]="'q' + i + 'o' + j">
-                        {{ option }}
-                    </label>
-
+                <div class="options-container ms-5">
+                    <div *ngFor="let option of question.options; let j = index" 
+                         class="option-item form-check mb-2 p-3 rounded border"
+                         [class.selected]="examForm.get('answers.' + i)?.value == j">
+                        <input class="form-check-input me-3" 
+                               type="radio" 
+                               [formControlName]="i.toString()" 
+                               [value]="j"
+                               [id]="'q' + i + 'o' + j">
+                        <label class="form-check-label flex-grow-1 cursor-pointer" 
+                               [for]="'q' + i + 'o' + j">
+                            <span class="option-letter me-2 fw-bold text-primary"></span>
+                            {{ option }}
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit Exam</button>
+        <div class="submit-section mt-5 pt-4 border-top">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="exam-progress">
+                    <small class="text-muted">
+                        Progress:  {{ exam.questions.length }} answered
+                    </small>
+                    <div class="progress mt-1" style="height: 4px;">
+                        <div class="progress-bar" 
+                             [style.width.%]=" exam.questions.length * 100">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" 
+                        class="btn btn-primary btn-lg px-4"
+                        [disabled]="!examForm.valid">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Submit Exam
+                </button>
+            </div>
+        </div>
     </form>
 </app-shared-card>
