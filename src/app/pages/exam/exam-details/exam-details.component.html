@@ -1,0 +1,27 @@
+<app-shared-card>
+    <h2 class="text-muted text-center">Exam Details</h2>
+
+    <div *ngIf="exam">
+        <div class="mb-3">
+            <h3>{{ exam.title }}</h3>
+            <p>Created by Teacher ID: {{ exam.teacherId }}</p>
+        </div>
+
+        <div *ngFor="let question of exam.questions; let i = index" class="mb-4">
+            <h4>Question {{ i + 1 }}: {{ question.question }}</h4>
+            <ul>
+                <li *ngFor="let option of question.options; let j = index">
+                    {{ option }}
+                    <span *ngIf="j === +question.correctAnswer" class="text-success">(Correct Answer)</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mb-3">
+            <h4>Students:</h4>
+            <ul>
+                <li *ngFor="let student of exam.students">{{ student }}</li>
+            </ul>
+        </div>
+    </div>
+</app-shared-card>
