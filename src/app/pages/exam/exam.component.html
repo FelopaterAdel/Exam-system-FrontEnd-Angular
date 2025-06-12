@@ -1,0 +1,59 @@
+<app-shared-card>
+  <app-exam-card />
+  
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3" >
+    @for (exam of exams; track exam._id) {
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ exam.title }}</h5>
+          <div class="card-text">
+            <div><strong>ID:</strong> {{ exam._id }}</div>
+            <div><strong>Teacher ID:</strong> {{ exam.teacherId }}</div>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent d-flex justify-content-end" *ngIf="isTeacher">
+          <button 
+            [routerLink]="['/exams', exam._id,'edit']" 
+            class="btn btn-sm btn-outline-info mx-1"
+            title="Edit"
+          >
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button 
+            [routerLink]="['/exams', exam._id]" 
+            class="btn btn-sm btn-outline-warning mx-1"
+            title="View"
+          >
+            <i class="bi bi-eye-fill"></i>
+          </button>
+          <button 
+            (click)="deleteHandler(exam._id)"
+            class="btn btn-sm btn-outline-danger mx-1"
+            title="Delete"
+          >
+            <i class="bi bi-trash3-fill"></i>
+          </button>
+        </div>
+        <div class="card-footer bg-transparent d-flex justify-content-end" *ngIf="isStudent">
+          <button 
+            [routerLink]="['/exams', exam._id,'take']" 
+            class="btn btn-sm btn-outline-info mx-1"
+            title="Enter Exam"
+          > Enter Exam
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button 
+            [routerLink]="['/exams', exam._id,'result']" 
+            class="btn btn-sm btn-outline-info mx-1"
+            title="Enter Exam"
+          > Get Result
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</app-shared-card>
