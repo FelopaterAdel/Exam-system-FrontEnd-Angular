@@ -1,34 +1,73 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card bg-dark text-white shadow p-4">
-    <h2 class="mb-4 text-center">LogIn</h2>
-    <!-- success message -->
-<div *ngIf="successMessage" class="alert alert-success">
-  {{ successMessage }}
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- error message -->
-<div *ngIf="errorMessage" class="alert alert-danger">
-  {{ errorMessage }}
-</div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Login Form</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
 
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter Your Email" />
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2 class="login-title">
+        <i class="fas fa-sign-in-alt"></i>
+        Welcome Back
+      </h2>
+
+      <!-- Success message -->
+      <div class="alert alert-success" style="display: none;" id="successMessage">
+        <i class="fas fa-check-circle me-2"></i>
+        Login successful! Redirecting...
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" formControlName="password" class="form-control" id="password" placeholder="Enter Your Password" />
+
+      <!-- Error message -->
+      <!-- error message -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
       </div>
 
-      <p class="lead">
-        Don't Have an account
-        <a [routerLink]="['/account/register']" class="text-info">Register</a>
-      </p>
+      <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+          <label for="email" class="form-label">
+            <i class="fas fa-envelope me-1"></i>
+            Email Address
+          </label>
+          <div style="position: relative;">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" formControlName="email" class="form-control" id="email"
+              placeholder="Enter your email address" required />
+          </div>
+        </div>
 
-      <button type="submit" class="btn btn-success d-block w-100">
-        login
-      </button>
-    </form>
+        <div class="form-group">
+          <label for="password" class="form-label">
+            <i class="fas fa-lock me-1"></i>
+            Password
+          </label>
+          <div style="position: relative;">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" formControlName="password" class="form-control" id="password"
+              placeholder="Enter your password" required />
+          </div>
+        </div>
+
+        <div class="register-link">
+          Don't have an account?
+          <a href="#" [routerLink]="['/account/register']">Create one here</a>
+        </div>
+
+        <button type="submit" class="btn btn-login">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign In
+        </button>
+      </form>
+    </div>
   </div>
-</div>
+
+
+</body>
+
+</html>
