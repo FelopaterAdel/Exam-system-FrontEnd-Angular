@@ -1,0 +1,56 @@
+<app-shared-card>
+  <h2 class="text-muted text-center">
+    {{ examId == 0 ? "Add New Exam" : "Edit Exam" }}
+  </h2>
+
+  <form [formGroup]="examForm" (ngSubmit)="submitExam()">
+    <!-- Exam Title -->
+    <div class="mb-3">
+      <label class="form-label">Exam Title:</label>
+      <input formControlName="title" class="form-control" placeholder="Enter exam title" />
+    </div>
+
+    <!-- Questions -->
+    <div formArrayName="questions" class="mb-3">
+      <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i" class="border p-3 mb-3 rounded">
+        <h5>Question {{ i + 1 }}</h5>
+
+        <!-- Question Text -->
+        <div class="mb-2">
+          <input formControlName="question" class="form-control" placeholder="Enter question text" />
+        </div>
+
+        <!-- Options -->
+        <div formArrayName="options">
+          <label class="form-label">Options:</label>
+          <div *ngFor="let option of getOptions(i).controls; let j = index" class="mb-2">
+            <input [formControlName]="j" class="form-control" placeholder="Option {{ j + 1 }}" />
+          </div>
+          <button type="button" class="btn btn-sm btn-primary mt-2" (click)="addOption(i)">+ Add Option</button>
+        </div>
+
+        <!-- Correct Answer -->
+        <div class="mt-3">
+          <label class="form-label">Correct Answer (Index):</label>
+          <input formControlName="correctAnswer" type="number" class="form-control" />
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="addQuestion()">+ Add Question</button>
+    </div>
+
+  
+    <div formArrayName="students" class="mb-3">
+      <label class="form-label">Students:</label>
+      <div *ngFor="let student of students.controls; let k = index" class="mb-2">
+        <input [formControlName]="k" class="form-control" placeholder="Student ID" />
+      </div>
+      <button type="button" class="btn btn-primary mt-2" (click)="addStudent()">+ Add Student</button>
+    </div>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-success">
+        {{ examId == 0 ? 'Create Exam' : 'Update Exam' }}
+      </button>
+    </div>
+  </form>
+</app-shared-card>
