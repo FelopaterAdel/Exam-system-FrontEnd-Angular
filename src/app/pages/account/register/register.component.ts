@@ -3,11 +3,10 @@ import { authorezationService } from '../../../services/authorezation'
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../models/User';
-import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -37,7 +36,6 @@ export class RegisterComponent {
       this.registerService.registration(user).subscribe({
         next: res =>{
           this.successMessage = 'Registration successful! Redirecting to login...';
-          // redirect after delay
           setTimeout(() => {
             this.router.navigate(['account/login']);
           }, 2000);

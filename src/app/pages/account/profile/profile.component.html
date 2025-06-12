@@ -1,8 +1,8 @@
 <div class="profile-container">
   <div class="profile-header">
     <div class="header-actions">
-      <button class="btn btn-secondary" (click)="goToDashboard()">
-        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      <button class="btn btn-secondary" [routerLink]="['/exams']">
+        <i class=" fas fa-arrow-left"></i> Back to Dashboard
       </button>
       <button class="btn btn-danger" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i> Logout
@@ -24,36 +24,22 @@
     <div class="profile-content">
       <div class="profile-section">
         <h2>Personal Information</h2>
-        
+
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            class="form-control" 
-            [(ngModel)]="user.name" 
-            [readonly]="!isEditing"
+          <input type="text" id="name" class="form-control" [(ngModel)]="user.name" [readonly]="!isEditing"
             [class.editing]="isEditing">
         </div>
 
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input 
-            type="email" 
-            id="email" 
-            class="form-control" 
-            [(ngModel)]="user.email" 
-            [readonly]="!isEditing"
+          <input type="email" id="email" class="form-control" [(ngModel)]="user.email" [readonly]="!isEditing"
             [class.editing]="isEditing">
         </div>
 
         <div class="form-group">
           <label for="role">Role</label>
-          <select 
-            id="role" 
-            class="form-control" 
-            [(ngModel)]="user.role" 
-            [disabled]="!isEditing"
+          <select id="role" class="form-control" [(ngModel)]="user.role" [disabled]="!isEditing"
             [class.editing]="isEditing">
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
@@ -62,25 +48,16 @@
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input 
-            type="password" 
-            id="password" 
-            class="form-control" 
-            [(ngModel)]="user.password" 
-            [readonly]="!isEditing"
-            [class.editing]="isEditing"
-            placeholder="Enter new password">
+          <input type="password" id="password" class="form-control" [(ngModel)]="user.password" [readonly]="!isEditing"
+            [class.editing]="isEditing" placeholder="Enter new password">
         </div>
       </div>
 
       <div class="profile-actions">
-        <button 
-          *ngIf="!isEditing" 
-          class="btn btn-primary" 
-          (click)="toggleEdit()">
+        <button *ngIf="!isEditing" class="btn btn-primary" (click)="toggleEdit()">
           <i class="fas fa-edit"></i> Edit Profile
         </button>
-        
+
         <div *ngIf="isEditing" class="edit-actions">
           <button class="btn btn-success" (click)="saveProfile()">
             <i class="fas fa-save"></i> Save Changes
