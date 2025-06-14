@@ -10,8 +10,8 @@ import { AuthService } from './AuthService';
 
 })
 export class examService {
-  //baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/api/exams"
-    baseUrl: string = "http://127.0.0.1:3000/api/exams"
+  baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/api/exams"
+   // baseUrl: string = "http://127.0.0.1:3000/api/exams"
 
   constructor(private http: HttpClient,private authService:AuthService) { }
 
