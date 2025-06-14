@@ -41,7 +41,7 @@
 
   
     <div formArrayName="students" class="mb-3">
-      <label class="form-label">Students:</label>
+      <label class="form-label">Students Emails:</label>
       <div *ngFor="let student of students.controls; let k = index" class="mb-2">
         <input [formControlName]="k" class="form-control" placeholder="Student ID" />
       </div>

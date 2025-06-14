@@ -46,7 +46,7 @@ export class ExamFormComponent implements OnInit {
 
           this.examForm.patchValue({
             title: response.title,
-            teacherId: response.teacherId
+            teacherEmail: response.teacherEmail
           });
 
           response.questions.forEach(q => {
@@ -93,7 +93,6 @@ export class ExamFormComponent implements OnInit {
 
   createQuestionGroup(): FormGroup {
     return this.fb.group({
-      //  _id: [''], // Add this line
       question: ['', Validators.required],
       options: this.fb.array([
         this.fb.control('', Validators.required),

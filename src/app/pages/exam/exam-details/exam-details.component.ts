@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { examService } from '../../../services/exam.service';
 import { IExam } from '../../../models/IExam';
 import { CommonModule } from '@angular/common';
-import { SharedCardComponent } from '../../../shared/shared-card/shared-card.component';
 
 @Component({
   selector: 'app-exam-details',
@@ -29,6 +28,7 @@ export class ExamDetailsComponent implements OnInit {
   loadExam(): void {
     this.examService.getExamById(this.examId).subscribe(exam => {
       this.exam = exam;
+      console.log(exam);
     });
   }
   toChar(code: number): string {
