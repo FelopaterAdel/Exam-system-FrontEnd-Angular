@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 export class ExamFormComponent implements OnInit {
   examId: any;
   examForm!: FormGroup;
+  errorMessage:string =''; 
 
   constructor(
     private fb: FormBuilder,
@@ -127,7 +128,10 @@ export class ExamFormComponent implements OnInit {
             this.router.navigate(['/exams'])
             console.log('Exam created:', res)
           },
-          error: err => console.error('Error:', err)
+          error: err => {
+            this.errorMessage = err?.error?.message || 'An error occurred during create Exam.'
+          }
+
         });
       } else {
         this.examService.editExam(this.examId, examData).subscribe({

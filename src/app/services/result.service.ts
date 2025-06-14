@@ -12,7 +12,7 @@ import { throwError } from 'rxjs';
 
 })
 export class resultService {
-  baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/i/results"
+  baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/api/results"
   constructor(private http: HttpClient, private authService: AuthService) { }
 
  submitExam(examId: string, answers: any): Observable<IExamResult> {
