@@ -8,7 +8,7 @@ import { AuthService } from './AuthService';
 })
 export class authorezationService {
 
-  baseUrl: string = "http://localhost:3000/api/auth";
+  baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/api/auth";
 
   constructor(
     private http: HttpClient,

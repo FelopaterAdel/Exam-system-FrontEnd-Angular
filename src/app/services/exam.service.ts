@@ -10,7 +10,7 @@ import { AuthService } from './AuthService';
 
 })
 export class examService {
-  baseUrl: string = "http://localhost:3000/api/exams"
+  baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/api/exams"
   constructor(private http: HttpClient,private authService:AuthService) { }
 
   getAllExams(): Observable<IExam[]> {

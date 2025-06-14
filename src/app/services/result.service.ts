@@ -12,14 +12,13 @@ import { throwError } from 'rxjs';
 
 })
 export class resultService {
-  baseUrl: string = "http://localhost:3000/api/results"
+  baseUrl: string = "https://exam-system-backend-nodejs-production.up.railway.app/i/results"
   constructor(private http: HttpClient, private authService: AuthService) { }
 
  submitExam(examId: string, answers: any): Observable<IExamResult> {
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${this.authService.currentToken}`,
-    'Content-Type': 'application/json'
-  });
+   const headers = new HttpHeaders({
+      'Authorization':  `${this.authService.currentToken}`,
+    });
   
   const payload = {
     answers: answers
@@ -29,8 +28,8 @@ export class resultService {
 }
   getResult(examId: string): Observable<IExamResult> {
   const headers = new HttpHeaders({
-    'Authorization': `Bearer ${this.authService.currentToken}`
-  });
+      'Authorization':  `${this.authService.currentToken}`,
+    });
   
   return this.http.get<IExamResult>(`${this.baseUrl}/${examId}`, { headers })
     .pipe(
